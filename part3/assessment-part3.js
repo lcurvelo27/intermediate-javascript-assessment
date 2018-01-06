@@ -14,6 +14,13 @@
 
 // CODE HERE...
 
+var callBinding = (magicAnimals, updateAnimal, id) => {
+	for(var i = 0; i<magicAnimals.length; i++) {
+		if(magicAnimals[i].id === id) {
+			return updateAnimal.call(magicAnimals[i], 'Trogdor')
+		}
+	}
+}
 
 
 // *************
@@ -29,6 +36,13 @@
 
 // CODE HERE...
 
+var applyBinding = (magicAnimals, updateAnimal, id) => {
+	for(var i = 0; i<magicAnimals.length; i++) {
+		if(magicAnimals[i].id === id) {
+			return updateAnimal.apply(magicAnimals[i], ['being majestic', 'eating rainbows'])
+		}
+	}
+} 
 
 
 // *************
@@ -49,6 +63,14 @@ var foo;
 
 // CODE HERE...
 
+var promiseMe = ($q) => {
+	return new Promise((resolve, reject) => {
+		setTimeout(function(){			
+			foo = 'bar'
+			resolve(foo)
+		}, 20)	
+	})
+}
 
 
 // *************
@@ -64,3 +86,26 @@ var foo;
 // and then resolve the array as you complete your promise.
 
 // CODE HERE...
+
+var emailList = ($q, $http) => {
+	var emails = []
+	return new Promise((resolve, reject) =>{
+		$http.get('/api/users').then(response =>{
+			var data = response.data
+			data.map((data) => {
+				emails.push(data.email)
+			})			
+			resolve(emails)
+		})
+	})
+}
+
+
+
+
+
+
+
+
+
+

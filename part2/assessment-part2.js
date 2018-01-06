@@ -15,11 +15,11 @@
     {
       data: [
         {
-      		email: "awilliams0@intel.com",
-      		first_name: "Alan",
-      		gender: "Male",
-      		id: 1,
-      		last_name: "Williams"
+          email: "awilliams0@intel.com",
+          first_name: "Alan",
+          gender: "Male",
+          id: 1,
+          last_name: "Williams"
         },
         {
           //...
@@ -44,7 +44,14 @@ function noWeakLink() {
     url: '/api/users'
   })
   // CODE HERE...
-
+  .then(response => {
+    firstUser = response.data[0]
+    return response
+  })
+  .then(response => {
+    thirdUser = response.data[2]
+    return response.data[9]
+  })
 }
 
 
@@ -75,6 +82,7 @@ function large() {
 }
 // CODE HERE...
 
+var boundToElephant = large.bind(elephant)
 
 
 // *************
@@ -89,7 +97,9 @@ function large() {
 
 // CODE HERE...
 
-
+var deathStar = (capacity, crew) => {
+  return capacity.bind(crew)
+}
 
 // *************
 // * PROBLEM 4 *
@@ -104,7 +114,11 @@ function large() {
 
 // CODE HERE...
 
-
+var accountingOffice = (assets) => {
+  return (liabilities) => {
+    return assets + liabilities
+  }
+}
 
 // *************
 // * PROBLEM 5 *
@@ -129,7 +143,16 @@ function large() {
 
 // CODE HERE...
 
-
+var forgetter = (name) => {
+  var remember = []
+  return function rememberAll(item) {
+    remember.push(item)
+    return {
+      name: name,
+      remember: remember
+    }
+  }
+}
 
 // *************
 // * PROBLEM 6 *
@@ -156,3 +179,55 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+var frodo = (startingHungerValue, startingDangerValue) => {
+  var hunger = startingHungerValue;
+  var danger = startingDangerValue;
+  return{
+    dinnerOverFire: () => {
+      if(hunger - 25 >= 0 && danger + 40 <= 100){
+        hunger -= 25
+        danger += 40
+        return {
+          hunger: hunger,
+          danger: danger
+        }
+      }
+      else {
+        return {
+          hunger: 0,
+          danger: 100
+        }
+      }
+    },
+    hidingInBush: () => {
+      if(hunger + 35 <= 100 && danger - 20 >= 0) {
+        hunger += 35;
+        danger -= 20
+        return {
+          hunger: hunger,
+          danger: danger
+        }
+      } 
+      else {
+        return {
+          hunger: 100,
+          danger: 0
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
